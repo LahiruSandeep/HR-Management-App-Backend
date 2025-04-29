@@ -1,6 +1,9 @@
 package edu.icet.controller;
 
 import edu.icet.dto.Employee;
+import edu.icet.dto.Otp;
+import edu.icet.dto.SignInRequest;
+import edu.icet.entity.EmployeeEntity;
 import edu.icet.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -57,5 +60,47 @@ public class EmployeeController {
             return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/authenticate/{email}")
+    ResponseEntity<String> authenticate(@PathVariable String email) {
+        try{
+            employeeService.authenticate(email);
+            return new ResponseEntity<>(HttpStatus.CONTINUE);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<Employee> signIn(@RequestBody SignInRequest signInRequest) {
+        try{
+            Employee authenticateEmployee = employeeService.authenticateEmployee(signInRequest);
+            return new ResponseEntity<>(authenticateEmployee, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping("/otp")
+    ResponseEntity<String> getUserById(@RequestBody Otp otp) {
+        try{
+            if(employeeService.validateOtp(otp)){
+                return new ResponseEntity<>("OTP validated successfully", HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>("Invalid OTP", HttpStatus.BAD_REQUEST);
+            }
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PutMapping("/reset-password")
+    ResponseEntity<EmployeeEntity> resetPassword(@RequestBody  SignInRequest request){
+        try{
+            return new ResponseEntity<>(employeeService.resetPassword(request), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }

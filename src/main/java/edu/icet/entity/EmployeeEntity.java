@@ -22,4 +22,23 @@ public class EmployeeEntity {
     private String createdAt;
     private String updatedAt;
     private boolean isDisabled;
+
+
+    public void setOtpNumber(String otp) {
+    }
+
+    public String getFullName() {
+        return null;
+    }
+
+    public Object getPassword() {
+        return null;
+    }
+
+    public Object getOtpNumber() {
+        return null;
+    }
+
+    public void setPassword(String password) {
+    }
 }
