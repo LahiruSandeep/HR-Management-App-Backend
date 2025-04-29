@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -23,5 +26,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        ArrayList<Employee> employeeArrayList=new ArrayList<>();
+        try {
+            List<EmployeeEntity> employeeEntities = employeeRepository.findByIsDisabledFalse();
+            employeeEntities.forEach(employeeEntity -> {
+                employeeArrayList.add(modelMapper.map(employeeEntity, Employee.class));
+            });
+            return employeeArrayList;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

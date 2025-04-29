@@ -21,8 +21,7 @@ public class EmployeeEntity {
     private String name;
     private String email;
     private String department;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private DateFormat createdAt;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private DateFormat updatedAt;
+    private String createdAt;
+    private String updatedAt;
+    private boolean isDisabled;
 }

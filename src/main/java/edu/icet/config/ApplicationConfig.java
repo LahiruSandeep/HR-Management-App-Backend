@@ -16,15 +16,6 @@ public class ApplicationConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/hr_management");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234");
-        return dataSource;
-    }
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
