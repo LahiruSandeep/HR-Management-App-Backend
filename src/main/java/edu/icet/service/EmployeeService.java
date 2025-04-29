@@ -10,4 +10,6 @@ public interface EmployeeService {
     void saveEmployee(Employee employee);
 
     List<Employee> getAllEmployees();
+
+    List<Employee> updateEmployee(Employee employee);
 }

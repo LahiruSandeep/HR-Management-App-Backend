@@ -41,4 +41,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null;
         }
     }
+
+    @Override
+    public List<Employee> updateEmployee(Employee employee) {
+        ArrayList<Employee> employeeArrayList=new ArrayList<>();
+        try{
+            employeeRepository.save(modelMapper.map(employee,EmployeeEntity.class));
+            List<EmployeeEntity> employeeEntities = employeeRepository.findByIsDisabledFalse();
+            employeeEntities.forEach(employeeEntity -> {
+                employeeArrayList.add(modelMapper.map(employeeEntity, Employee.class));
+            });
+            return employeeArrayList;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

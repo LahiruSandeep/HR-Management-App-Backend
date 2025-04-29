@@ -36,4 +36,13 @@ public class EmployeeController {
         }
     }
 
+    @PutMapping("/update")
+    ResponseEntity<List<Employee>> updateEmployee(@RequestBody Employee employee){
+        try{
+            return new ResponseEntity<List<Employee>>(employeeService.updateEmployee(employee),HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
