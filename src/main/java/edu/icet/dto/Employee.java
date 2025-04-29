@@ -14,6 +14,6 @@ public class Employee {
     private String name;
     private String email;
     private String department;
-    private DateFormat createdAt;
-    private DateFormat updatedAt;
+    private String createdAt;
+    private String updatedAt;
 }

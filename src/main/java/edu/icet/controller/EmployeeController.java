@@ -18,11 +18,11 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/create")
+    @PostMapping("/add")
     ResponseEntity<String> saveEmployee(@RequestBody Employee employee){
         try{
             employeeService.saveEmployee(employee);
-            return ResponseEntity.ok("Item saved successfully");
+            return ResponseEntity.ok("Employee saved successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -50,7 +50,7 @@ public class EmployeeController {
     ResponseEntity<String> deleteEmployeeById(@PathVariable String employeeId){
         try {
             employeeService.deleteById(employeeId);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Employee deleted successfully", HttpStatus.ACCEPTED);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {

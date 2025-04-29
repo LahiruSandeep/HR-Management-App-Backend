@@ -10,5 +10,5 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity,Integer
         return null;
     }
 
-    List<EmployeeEntity> findByIsDisabledFalse();
+//    List<EmployeeEntity> findByIsDisabledFalse();
 }

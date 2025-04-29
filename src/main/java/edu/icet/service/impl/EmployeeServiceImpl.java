@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getAllEmployees() {
         ArrayList<Employee> employeeArrayList=new ArrayList<>();
         try {
-            List<EmployeeEntity> employeeEntities = employeeRepository.findByIsDisabledFalse();
+            List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
             employeeEntities.forEach(employeeEntity -> {
                 employeeArrayList.add(modelMapper.map(employeeEntity, Employee.class));
             });
@@ -42,12 +42,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+//    List<Customer> customerList = new ArrayList<>();
+//        repository.findAll().forEach(customer -> customerList.add(mapper.map(customer, Customer.class)));
+//        return customerList;
+
     @Override
     public List<Employee> updateEmployee(Employee employee) {
         ArrayList<Employee> employeeArrayList=new ArrayList<>();
         try{
             employeeRepository.save(modelMapper.map(employee,EmployeeEntity.class));
-            List<EmployeeEntity> employeeEntities = employeeRepository.findByIsDisabledFalse();
+            List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
             employeeEntities.forEach(employeeEntity -> {
                 employeeArrayList.add(modelMapper.map(employeeEntity, Employee.class));
             });
