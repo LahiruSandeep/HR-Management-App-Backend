@@ -2,6 +2,7 @@ package edu.icet.controller;
 
 import edu.icet.dto.Employee;
 import edu.icet.service.EmployeeService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,18 @@ public class EmployeeController {
             return new ResponseEntity<List<Employee>>(employeeService.updateEmployee(employee),HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<String> deleteEmployeeById(@PathVariable String employeeId){
+        try {
+            employeeService.deleteById(employeeId);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

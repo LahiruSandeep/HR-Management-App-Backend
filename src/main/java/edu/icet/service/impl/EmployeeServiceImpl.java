@@ -56,4 +56,17 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void deleteById(String employeeId) {
+        try {
+            EmployeeEntity byEmployeeId = EmployeeRepository.findByEmployeeId(employeeId);
+            byEmployeeId.setDisabled(true);
+            employeeRepository.save(byEmployeeId);
+        } catch (Exception e) {
+            System.out.println("Error disabling employee: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+    }
 }

@@ -17,7 +17,7 @@ import java.text.DateFormat;
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer employeeId;
+    private String employeeId;
     private String name;
     private String email;
     private String department;

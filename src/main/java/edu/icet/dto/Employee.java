@@ -10,7 +10,7 @@ import java.text.DateFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-    private Integer employeeId;
+    private String employeeId;
     private String name;
     private String email;
     private String department;
